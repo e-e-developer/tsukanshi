@@ -161,7 +161,6 @@ var questionObj =
     },
     _createLoadQuestionSQL: function(quizObj, option)
     {
-
         var whereCategoryCodeQuery = '';
         var limitQuestionCountSql = 'limit ' + (option.questionStartPos - 1) + ',' + option.questionCount;
         if (option.randamFlag) {
@@ -170,6 +169,12 @@ var questionObj =
         var examTimesOnlySql = '';
         if( option.questionExamTimes ){
             examTimesOnlySql += ' and examTimes=' + option.questionExamTimes + ' ';
+        }
+
+        // 重要度ランクによるフィルタリング
+        var importanceRankSql = '';
+        if (option.importanceRanks && option.importanceRanks.length > 0) {
+            importanceRankSql = " and importanceRank IN ('" + option.importanceRanks.join("','") + "')";
         }
 
         var mistakeOnlySql = '';
@@ -192,6 +197,7 @@ var questionObj =
           + ' ' + whereCategoryCodeQuery
           + ' ' + examTimesOnlySql
           + ' ' + mistakeOnlySql
+          + ' ' + importanceRankSql
           + ' ' + orderbySql
           + ' ' + limitQuestionCountSql
           ;

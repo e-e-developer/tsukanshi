@@ -60,6 +60,7 @@ var setting = {
         answerKey: "answerKey TEXT",
         explanation: "explanation TEXT",
         stampCorrectAnswer: "stampCorrectAnswer INTEGER",
+        importanceRank: "importanceRank TEXT",
         primaryKeys: ["categoryCode", "examTimes", "mainQuestionSeq", "subQuestionSeq"]
     },
     tuuKanGyouHouCategoryCodes: [1,2,3,4,5,6,7],

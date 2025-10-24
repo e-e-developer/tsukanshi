@@ -47,6 +47,20 @@
             width:100%; min-height:50px;
             padding:0px;
         }
+        .importance-rank-selection {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 5px 0;
+        }
+        .importance-rank-selection .checkbox {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .importance-rank-selection .checkbox span {
+            margin-left: 5px;
+        }
     </style>
     <script>
         ons.ready(function() {
@@ -292,6 +306,23 @@
                     <div>出題順をランダムにする</div>
                     <div class="preDialogRandamSwitch">
                         <ons-switch id="preDialog-randamSwitch"></ons-switch>
+                    </div>
+                </div>
+                <div class="option">
+                    <div>重要度ランク選択</div>
+                    <div class="importance-rank-selection">
+                        <label class="checkbox">
+                            <ons-checkbox input-id="rank-a" name="importanceRank" value="A"></ons-checkbox>
+                            <span>Aランク</span>
+                        </label>
+                        <label class="checkbox">
+                            <ons-checkbox input-id="rank-b" name="importanceRank" value="B"></ons-checkbox>
+                            <span>Bランク</span>
+                        </label>
+                        <label class="checkbox">
+                            <ons-checkbox input-id="rank-c" name="importanceRank" value="C"></ons-checkbox>
+                            <span>Cランク</span>
+                        </label>
                     </div>
                 </div>
                 <div class="option">

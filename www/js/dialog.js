@@ -68,6 +68,12 @@ var dialogObj = {
             return;
         }
 
+        // 選択された重要度ランクを取得
+        var selectedRanks = [];
+        $('input[name="importanceRank"]:checked').each(function() {
+            selectedRanks.push($(this).val());
+        });
+
         var option = {
             // 未入力の場合は最大出題数にする
             questionCount: questionCount ? questionCount : initQuizCount,
@@ -77,7 +83,8 @@ var dialogObj = {
             mistakeQuizOnlyFlag: $('#preDialog-mistakeQuizOnlySwitch input')[0].checked,
             randamFlag: $('#preDialog-randamSwitch input')[0].checked,
             displayExplanationByCorrect: $('#preDialog-displayExplanationByCorrect input')[0].checked,
-            questionExamTimes:$("#preDialog-questionExamTimesSelect option:selected").val()
+            questionExamTimes:$("#preDialog-questionExamTimesSelect option:selected").val(),
+            importanceRanks: selectedRanks // 選択された重要度ランクを追加
         };
         quizObj.option = option;
         myNavigator.pushPage('quiz.html');
