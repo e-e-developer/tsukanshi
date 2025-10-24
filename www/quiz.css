@@ -1,0 +1,93 @@
+div.content-padded
+{
+    padding:10px;
+}
+
+
+span#rank_title
+{
+    font-size:x-large;
+    font-weight:bold;
+}
+
+span.answer_result
+{
+    font-size:x-large;
+    font-weight:bold;
+}
+
+
+div#rank_ratio
+{
+    font-size:large;
+    font-weight:bold;
+}
+
+
+div.home-link
+{
+    color: #F5DEDF;
+    font-size:18px;
+    background-size:cover;
+    width:270px;
+    height:45px;
+    padding:auto;
+    vertical-align:middle;
+    display:table-cell;
+    text-shadow:none;
+    font-weight: bold;
+}
+
+div#recapps
+{
+    background-color: #fff;
+}
+
+a.banner
+{
+    color:#000;
+    text-decoration:none;
+}
+
+
+div.comment
+{
+    display:none;
+
+}
+
+
+.checkbox--list-item {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    line-height: 44px;
+}
+
+
+img.question_images {
+    width:95%;
+    margin:2px;
+}
+
+
+
+#sound_btn {
+    z-index: 3;
+    position: absolute;
+    right: 30px;
+    bottom: 390px;
+    width: 60px;
+}
+
+span.answer_result
+{
+    padding-bottom: 2px;
+}
+
+.question_progress{
+    text-align: right;
+    margin: 6px;
+    font-size: 0.8em;
+}

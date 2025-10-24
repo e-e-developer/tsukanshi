@@ -1,0 +1,66 @@
+#errataTable .errataTableSelect
+{
+    padding: 10px;
+}
+#errataTable-select .select-input
+{
+    background-color: rgb(223, 255, 228);
+}
+#errataTable .errataTableRow {
+    border: 1px solid;
+    margin: -1px 0px 0px 0px;
+
+}
+
+#errataTable .errataTableCol {
+    border-left: 1px solid;
+    margin: 0px 0px 0px -1px;
+ 
+}
+#errataTable .errataTableColTitle {
+    color:blue;
+}
+#errataTable .errataFirstCol {
+    width: 50%;
+}
+
+#errataTable .errataCol {
+    width: 10%;
+}
+
+#errataTable-itemContainer{
+	font-size:13px;
+}
+#errataTable-onsRow_date .errataTableCol:nth-child(n+2) {
+    position: relative;
+    top: 1px;
+}
+
+ons-list.list ons-col:first-child{
+    font-size: 1rem;
+    text-align: right;
+    min-width: 85px !important;
+    white-space: nowrap;
+    position: relative;
+    right: 0.5rem;
+}
+
+.errataTableColRank{
+    font-size: inherit;
+}
+.errataTableColTitle .star_dummy{
+    font-size: 0.1rem;
+    opacity:0;
+    display: none;
+}
+.errataTableColTitle .star{
+    font-size: 0.9rem;
+}
+.errataTableCol{
+    max-height:1.4rem;
+}
+.errataTable-answerValue-maru{
+    position: relative;
+    font-size: 0.9rem;
+    /*top: -2px;*/
+}

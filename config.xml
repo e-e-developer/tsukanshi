@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="attractive.app23" version="6.2.1">
+  <name>【みこ会】通関士試験対策</name>
+  <description>Made with Monaca (http://monaca.mobi)</description>
+  <author/>
+  <content src="index.html"/>
+  <allow-navigation href="*"/>
+  <allow-intent href="itms:*"/>
+  <allow-intent href="itms-apps:*"/>
+  <preference name="loglevel" value="DEBUG"/>
+  <preference name="AndroidLaunchMode" value="singleTop"/>
+  <preference name="ErrorUrl" value=""/>
+  <preference name="SplashScreen" value="screen"/>
+  <preference name="AllowInlineMediaPlayback" value="false"/>
+  <preference name="BackupWebStorage" value="cloud"/>
+  <preference name="FadeSplashScreenDuration" value="250"/>
+  <preference name="KeyboardDisplayRequiresUserAction" value="true"/>
+  <preference name="SuppressesIncrementalRendering" value="false"/>
+  <preference name="TopActivityIndicator" value="gray"/>
+  <preference name="GapBetweenPages" value="0"/>
+  <preference name="PageLength" value="0"/>
+  <preference name="PaginationBreakingMode" value="page"/>
+  <preference name="PaginationMode" value="unpaginated"/>
+  <feature name="LocalStorage">
+    <param name="ios-package" value="CDVLocalStorage"/>
+  </feature>
+  <platform name="ios">
+    <preference name="orientation" value="all"/>
+    <icon src="/res/ios/icon/icon.png" width="57" height="57"/>
+    <icon src="/res/ios/icon/icon@2x.png" width="114" height="114"/>
+    <icon src="/res/ios/icon/icon-72.png" width="72" height="72"/>
+    <icon src="/res/ios/icon/icon-72@2x.png" width="144" height="144"/>
+    <icon src="/res/ios/icon/icon-60.png" width="60" height="60"/>
+    <icon src="/res/ios/icon/icon-60@2x.png" width="120" height="120"/>
+    <icon src="/res/ios/icon/icon-60@3x.png" width="180" height="180"/>
+    <icon src="/res/ios/icon/icon-76.png" width="76" height="76"/>
+    <icon src="/res/ios/icon/icon-76@2x.png" width="152" height="152"/>
+    <icon src="/res/ios/icon/icon-40.png" width="40" height="40"/>
+    <icon src="/res/ios/icon/icon-40@2x.png" width="80" height="80"/>
+    <icon src="/res/ios/icon/icon-50.png" width="50" height="50"/>
+    <icon src="/res/ios/icon/icon-50@2x.png" width="100" height="100"/>
+    <icon src="/res/ios/icon/icon-small.png" width="29" height="29"/>
+    <icon src="/res/ios/icon/icon-small@2x.png" width="58" height="58"/>
+    <icon src="/res/ios/icon/icon-small@3x.png" width="87" height="87"/>
+    <icon src="/res/ios/icon/icon-83.5@2x~ipad.png" width="167" height="167"/>
+    <splash src="/res/ios/screen/Default@2x~universal~anyany.png"/>
+    <config-file target="*-Info.plist" parent="GADApplicationIdentifier">
+      <string>ca-app-pub-2653369295607612~4750409135</string>
+    </config-file>
+    <config-file parent="GADIsAdManagerApp" platform="ios" target="*-Info.plist">
+      <true/>
+    </config-file>
+    <edit-config file="*-Info.plist" mode="merge">
+      <key>gad_preferred_webview</key>
+      <string>wkwebview</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSBluetoothAlwaysUsageDescription">
+      <string>Advertisement would like to use bluetooth.</string>
+    </edit-config>
+    <splash src="/res/ios/screen/Default@2x~universal~anyany.png"/>
+    <icon src="/res/ios/icon/icon-1024.png" width="1024" height="1024"/>
+    <icon src="/res/ios/icon/icon-20.png" width="20" height="20"/>
+    <config-file platform="ios" parent="CFBundleLocalizations" target="*-Info.plist">
+      <array>
+        <string>ja</string>
+      </array>
+    </config-file>
+  </platform>
+  <platform name="android">
+    <preference name="android-targetSdkVersion" value="35"/>
+    <icon src="/res/android/icon/ldpi.png" density="ldpi"/>
+    <icon src="/res/android/icon/mdpi.png" density="mdpi"/>
+    <icon src="/res/android/icon/hdpi.png" density="hdpi"/>
+    <icon src="/res/android/icon/xhdpi.png" density="xhdpi"/>
+    <icon src="/res/android/icon/xxhdpi.png" density="xxhdpi"/>
+    <icon src="/res/android/icon/xxxhdpi.png" density="xxxhdpi"/>
+    <preference name="AndroidWindowSplashScreenBackground" value="#ffffff"/>
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/screen/window_splashscreen_icon.png"/>
+  </platform>
+  <platform name="electron">
+    <icon src="/res/electron/icon/icon_electron_512.png" width="512" height="512"/>
+    <splash src="/res/electron/screen/electron_splash_image.png" width="620" height="300"/>
+    <preference name="SplashScreenWidth" value="620"/>
+    <preference name="SplashScreenHeight" value="300"/>
+    <preference name="ShowSplashScreen" value="false"/>
+  </platform>
+  <preference name="WindowsStorePublisherName" value="My Name"/>
+  <preference name="WindowsStoreIdentityName" value="7998c7c2-692f-c442-adbe-6545cc6042f5"/>
+  <custom-preference name="android-manifest/uses-permission/[@android:name='android.permission.RECORD_AUDIO']" delete="true"/>
+  <custom-preference name="android-manifest/uses-permission/[@android:name='android.permission.MODIFY_AUDIO_SETTINGS']" delete="true"/>
+  <custom-preference name="android-manifest/uses-permission/[@android:name='android.permission.WRITE_EXTERNAL_STORAGE']" delete="true"/>
+  <custom-preference name="android-manifest/uses-permission/[@android:name='android.permission.READ_PHONE_STATE']" delete="true"/>
+  <preference name="MediaTypesRequiringUserActionForPlayback" value="none"/>
+  <preference name="target-device" value="universal"/>
+  <preference name="AutoHideSplashScreen" value="true"/>
+  <preference name="FadeSplashScreen" value="true"/>
+  <preference name="ShowSplashScreenSpinner" value="false"/>
+  <preference name="EnableViewportScale" value="false"/>
+  <access origin="*"/>
+  <preference name="KeepRunning" value="true"/>
+  <preference name="monaca:AndroidIsPackageNameSeparate" value="false"/>
+  <preference name="DisallowOverscroll" value="true"/>
+  <preference name="Orientation" value="default"/>
+  <preference name="SplashScreenDelay" value="1000"/>
+  <preference name="Fullscreen" value="false"/>
+</widget>

@@ -1,0 +1,24 @@
+/* .timer-bar {
+  height: 7px;
+  border: 3px solid #960;
+  background: #640;
+  -moz-box-shadow: inset 0px 1px 2px 0px #333, inset 0px -1px 1px 0px #c80, 0px 1px 1px 0px #f0f0f0;
+}
+.timer-bar-progress {
+  height: 6px;
+  float: right;
+  border-top: 1px solid #fff;
+  background: #fa0;
+  background: -moz-linear-gradient(top,  #fa0 0%, #dd9300 100%);
+  background: -webkit-linear-gradient(top,  #fa0 0%,#dd9300 100%);
+  background: -o-linear-gradient(top,  #fa0 0%,#dd9300 100%);
+  background: -ms-linear-gradient(top,  #fa0 0%,#dd9300 100%);
+  background: linear-gradient(top,  #fa0 0%,#dd9300 100%);
+  border-top-color: #ffd277;
+  border-bottom-color: #960;
+} */
+
+.progress-bar {
+  height:1px;
+}
+  

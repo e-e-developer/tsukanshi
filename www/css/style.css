@@ -1,0 +1,506 @@
+
+.box11{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.box11 p {
+    margin: 0; 
+    padding: 0;
+}
+button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  font-size:1.1em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  width:95%;
+  height:auto;
+  padding:4%;
+  margin:2%;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+/*---------------------------
+共通の装飾部分
+----------------------------*/
+
+/* クイズの選択肢 中央揃え＆太文字*/
+.list
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+/* 画像スクロール */
+.mobile-scroll {width: 100%; overflow-x: scroll;}
+
+
+/* 文章の文字の大きさ */
+.quiz-page
+{
+  font-size:1.3em;
+}
+
+
+/*---------------------------
+main.htmlやhome.htmlのボタン部分▼
+----------------------------*/
+
+td.main_btn
+{
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border: 3px #044110 solid;
+    background-color: rgba(255, 242, 253, 0);
+    background-size:100% 100%;
+    width:33%;
+    height:auto;
+    padding:2%;
+}
+
+td.main_btn
+{
+    position: relative;
+}
+
+td.main_btn .count{
+    height: 5vw;
+    font-size: 5vw;
+    color: darkcyan;
+    background-color: lightgray;
+    margin-left: 6px;
+    margin-top: 0px;
+    position: absolute;
+    top: 2vw;
+    right: 1vw;
+    display: flex;
+    line-height: 1;
+}
+td.main_btn .rank{
+    height: 5vw;
+    font-size: 5vw;
+    color: black;
+    background-color: transparent;
+    margin-left: 6px;
+    margin-top: 0px;
+    position: absolute;
+    bottom: 2vw;
+    right: 2vw;
+    display: flex;
+    line-height: 1;
+}
+    
+    
+
+
+
+/*main.htmlのボタンの文字部分▼*/
+div.main_btn
+{
+    color: #044110;
+    font-size:5vw;
+    background-size:100% 100%;
+    width:auto;
+    height:auto;
+    padding:2%;
+    text-shadow:none;
+    font-weight: bold;
+}
+
+
+
+
+/*---------------------------
+クイズの装飾部分▼
+----------------------------*/
+
+/* 文章(クイズ問題文等)のCSS▼ */
+div.about-panel
+{
+    /* font-size:; */
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    padding:10px;
+    margin:6px;
+    border: solid 2px #044110;
+    background-color: rgba(255, 251, 247, 0);
+    color: #044110;
+    text-shadow: none;
+    /* font-weight: bold; */
+    /* text-align: ; */
+}
+
+
+/*クイズの解説部分▼*/
+div.answer_result_panel
+{
+    display:none;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    padding:10px;
+    margin:6px;
+    border: solid 2px #044110;
+    background-color: rgba(255, 251, 247, 0);
+    color: #044110;
+    text-shadow: none;
+}
+
+/*クイズの解説(枠組み)部分▼*/
+table.answer_result_panel
+{
+    width:100%;
+    height:100%;
+    border-style: none;
+    text-align: center;
+}
+
+/*クイズの解説(文字)部分▼*/
+td.answer_result_panel
+{
+    width:100%;
+    height:100%;
+    border-style: none;
+    color: #ffffff;
+    text-shadow: none;
+    text-align: left;
+}
+
+
+/*クイズ下部のブックマーク部分*/
+.bookmark_panel{
+    text-align: center;
+}
+/*クイズ下部のブックマーク(星)部分*/
+.bookmark_panel .star{
+    filter: blur(0px) brightness(0%) contrast(165%) hue-rotate(96deg) invert(100%) saturate(0%) drop-shadow(0px 0px 1.3px rgba(0, 0, 0, 1));
+    font-size: 1.6em;
+}
+/*クイズ下部のブックマーク(星:登録済の場合)部分*/
+.bookmark_panel .star.bookmarked{
+    filter:none;
+    font-size: 1.6em;
+}
+/*クイズ下部のブックマーク(リンク)部分*/
+.bookmark_panel a{
+    display: inline-block;
+    color: #1aab8a;
+    text-decoration: none;
+    width: 40%;
+    max-width: 200px;
+    text-align-last: justify;
+    position: relative;
+    left: 3px;
+}
+
+
+/* finishの戻るボタン */
+.finishmodoru_btn
+{
+    color: #000000;
+    font-size:5vw;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 3px rgb(255, 147, 24) outset;
+    background-color: rgb(255, 250, 246);
+    background-size:100% 100%;
+    padding:2%;
+    margin:2%;
+    text-shadow:none;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* finishのデザイン▼ */
+div.finish-panel1
+{
+    font-size:1.1em;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    padding:10px;
+    margin:6px;
+    border: double 3px rgb(255, 106, 101);
+    background-color: rgb(251, 236, 252);
+    color: rgb(0, 0, 0);
+    text-shadow: none;
+    font-weight: bold;
+    /* text-align: ; */
+}
+
+
+/* main.htmlの左上の戻るボタン */
+div.modoru_btn
+{
+    color: #000000;
+    font-size:5vw;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 3px rgb(95, 88, 82) solid;
+    background-color: rgba(255, 248, 224, 0.8);
+    background-size:100% 100%;
+    padding:2%;
+    margin:2%;
+    float: left;
+    text-shadow:none;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+/* font-size: 文字の大きさ 例)『font-size:2.0em;』 */
+/* font-weight: 文字の太さ 普通(none) 太い(bold) */
+/* text-align: 文章左寄せ(left)・中央揃え(center)・右寄せ(right) */
+/* padding: 要素の内側の余白 */
+/* margin: 要素の外側の余白 参照▶『https://saruwakakun.com/html-css/basic/margin-padding』 */
+
+
+
+/*home等でボタンを画像を使って表示する場合の文字部分▼*/
+div.home-link
+{
+    color: rgb(255, 255, 255);
+    font-size:18px;
+    background-size:cover;
+    width:250px;
+    height:40px;
+    padding:auto;
+    vertical-align:middle;
+    display:table-cell;
+    text-shadow:none;
+    font-weight: bold;
+}
+
+
+/*Twitterやプライバシーポリシー、おすすめの上部の空白スペース部分▼*/
+div.toolbar_panel_x
+{
+    width:100%;
+    height:5%;
+}
+
+
+/*Twitterやプライバシーポリシー、おすすめの枠組み部分▼*/
+div.toolbar_panel
+{
+    width:100%;
+    height:auto;
+}
+
+/*Twitterやプライバシーポリシー、おすすめ、homeの戻るボタン部分▼*/
+td.toolbar_btn
+{
+    border-radius: 21px;
+    -webkit-border-radius: 21px;
+    -moz-border-radius: 21px;
+    border: 3px rgb(7, 5, 0) solid;
+    background-color: rgba(22, 18, 2, 0.781);
+    background-size:100% 100%;
+    padding:1%;
+    margin:0%;
+    color: #ffffff;
+    font-size:3vw;
+    font-weight: bold;
+    text-shadow:none;
+}
+
+
+
+/*「Twitter」や「プライバシーポリシー」や「おすすめ」や「アプリについて」の上部の文字部分▼*/
+div.menu_lavel
+{
+    color: rgb(0, 0, 0);
+    font-size:4vw;
+    font-weight: bold;
+    text-shadow:none;
+    text-align: center;
+
+}
+
+
+/*おすすめの下部の文章部分▼*/
+div.osusume_lavel
+{
+    color: rgb(255, 255, 255);
+    font-size:4vw;
+    font-weight: bold;
+    text-shadow:none;
+}
+
+/* おすすめの枠 */
+div.osusume_panel
+{
+    border-radius: 21px;
+    -webkit-border-radius: 21px;
+    -moz-border-radius: 21px;
+    border: 3px rgb(204, 152, 40) solid;
+    background-color: rgba(44, 27, 6, 0.911);
+    background-size:100% 100%;
+    width:auto;
+    height:70%;
+    padding:2%;
+    margin:2%;
+    text-align:center;
+}
+
+/*---------------------------
+mainの装飾部分▼
+----------------------------*/
+
+table.main_panel
+{
+    width:100%;
+    height:100%;
+    border-style: none;
+    text-align: center;
+}
+
+td.main_panel
+{
+    width:100%;
+    height:100%;
+    border-style: none;
+}
+
+
+
+span#rank_title
+{
+    font-size:x-large;
+    font-weight:bold;
+}
+
+span.answer_result
+{
+    font-size:x-large;
+    font-weight:bold;
+}
+
+div#rank_ratio
+{
+    font-size:large;
+    font-weight:bold;
+}
+
+div#recapps
+{
+    background-color: #fff;
+}
+
+
+/*---------------------------
+プライバシー部分の装飾部分
+----------------------------*/
+
+/*プライバシーポリシーの枠組み部分▼*/
+div.privacy_panel
+{
+    border-radius: 21px;
+    -webkit-border-radius: 21px;
+    -moz-border-radius: 21px;
+    border: 3px rgb(204, 152, 40) solid;
+    background-color: rgba(44, 27, 6, 0.911);
+    background-size:100% 100%;
+    width:auto;
+    height:80%;
+    padding:2%;
+    margin:2%;
+    text-align:center;
+}
+
+/* プライバシーポリシーの文字部分▼ */
+div.recom_panel
+{
+    width:100%;
+    height:100%;
+    padding:0%;
+    text-align: left;
+    color: #faf6f6;
+    font-size:3vw;
+    text-shadow:none;
+    overflow:auto;
+}
+
+/*お問い合わせ▼*/
+div.otoiawase_panel
+{
+
+    border: 3px rgb(204, 152, 40) solid;
+    background-color: rgba(44, 27, 6, 0.911);
+    background-size:100% 100%;
+    width:auto;
+    height:80%;
+    padding:2%;
+    margin:2%;
+    text-align:center;
+}
+
+/*---------------------------
+特定商取引法の装飾部分
+----------------------------*/
+
+td.tokusyo
+{
+    padding:1%0%1%0%;
+    margin:0%;
+    color: #ffffff;
+    font-size:3vw;
+    text-shadow:none;
+    text-align:left;
+}
+
+
+
+
+/* ▼クイズの選択肢で「答えを見る」等の場合のCSS▼
+ul.list {
+  color: #e91414;
+  position: relative;
+  padding: 0.5em;
+  border: solid 3px rgb(255, 87, 87);
+  background-color: rgb(255, 224, 247);
+  list-style-type: none;
+  border-radius: 21px;
+  -webkit-border-radius: 21px;
+  -moz-border-radius: 21px;
+  text-align: center;
+  font-weight: bold;
+}
+*/

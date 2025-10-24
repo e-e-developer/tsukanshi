@@ -1,0 +1,77 @@
+#preDialog .noBorder {
+    border: none;
+}
+#preDialog .preDialogContentIn {
+    height: 100%;
+    margin: 15px;
+}
+#preDialog-title
+{
+    text-align: center;
+    margin: 15px;
+}
+#preDialog .option
+{
+    display: flex;
+    align-items: center;
+    margin: 0px 0px 20px 0px;
+}
+.preDialogRandamSwitch,
+.preDialogMistakeQuizOnlySwitch,
+.preDialogReplacementSwitch,
+.preDialogSelfScoringModeSwitch,
+.preDialogDisplayExplanationByCorrect,
+.preDialogSeSwitch
+{
+    margin-left: auto;
+}
+.preDialogQuestionCountInput,
+.preDialogStartPosInput
+{
+    width: 80px;
+}
+
+#preDialog .preDialogButton
+{
+    text-align: center;
+    width: 100%;
+    margin: 0 0 10px 0;
+}
+
+#preDialog .startButton
+{
+    margin: 0 0 10px 0;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    line-height: normal;
+    font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: auto;
+    text-decoration: none;
+    padding: 4px 10px;
+    font-size: 17px;
+    line-height: 32px;
+    letter-spacing: 0;
+    color: white;
+    vertical-align: middle;
+    background-color: #0076ff;
+    border: 0 solid currentColor;
+    border-radius: 3px;
+    transition: none;
+}
