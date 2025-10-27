@@ -1,9 +1,12 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=auto">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=auto">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <script src="components/loader.js"></script>
     <script src="lib/onsenui/js/onsenui.min.js"></script>
 
@@ -34,46 +37,32 @@
     <script src="./js/dialog.js"></script>
     <script src="./js/errataTable.js"></script>
     <script src="./js/util.js"></script>
-        <style>
-    .page__background {
-        background:url("./images/background_image.png") center center;
-        background-size:cover;
+    <style>
+        .page__background {
+            background: url("./images/background_image.png") center center;
+            background-size: cover;
         }
     </style>
 
     <style>
-        .bannerdiv
-        {
-            width:100%; min-height:50px;
-            padding:0px;
-        }
-        .importance-rank-selection {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 5px 0;
-        }
-        .importance-rank-selection .checkbox {
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-        .importance-rank-selection .checkbox span {
-            margin-left: 5px;
+        .bannerdiv {
+            width: 100%;
+            min-height: 50px;
+            padding: 0px;
         }
     </style>
     <script>
-        ons.ready(function() {
+        ons.ready(function () {
             document.querySelector('ons-modal').show();
             console.log("Onsen UI is ready!");
         });
 
         function onDeviceReady() {
             console.log("Device is ready");
-            var media = new Media (srcFile , onSuccess, onError);
+            var media = new Media(srcFile, onSuccess, onError);
         }
 
-        document.addEventListener('show', function(event) {
+        document.addEventListener('show', function (event) {
             var page = event.target;
             if (page.id == "home") {
                 if (sound_flag) {
@@ -83,20 +72,19 @@
                     $("#sound_off").show();
                     $("#sound_on").hide();
                 }
-                setTimeout(function() {
+                setTimeout(function () {
                     showModal();
                 }, 2000);
             }
         });
 
-        $(function(){
-            $('#global-tabbar').on('prechange', function(e) {
+        $(function () {
+            $('#global-tabbar').on('prechange', function (e) {
                 return;
             });
         });
 
-        function openLink(url)
-        {
+        function openLink(url) {
             window.open(url, "_blank");
         }
 
@@ -106,144 +94,158 @@
 
 
         //ログアウトする機能▼ 
-    //    document.addEventListener("visibilitychange", function() {
+        //    document.addEventListener("visibilitychange", function() {
         // if (document.hidden) {
-            // ページがバックグラウンドに移動したときの動作
-            // localStorage.removeItem('login');
+        // ページがバックグラウンドに移動したときの動作
+        // localStorage.removeItem('login');
         // } else {
-            // ページがフォアグラウンドに戻ったときの動作
+        // ページがフォアグラウンドに戻ったときの動作
         //    window.location.href = 'index.html';
         // }
         // });
     </script>
 </head>
+
 <body>
 
-<ons-page>
-    <script>
-        ons.getScriptPage().onInit = function() {
-            this.onShow = function() {
-                modal_flag = true;
+    <ons-page>
+        <script>
+            ons.getScriptPage().onInit = function () {
+                this.onShow = function () {
+                    modal_flag = true;
+                };
             };
-        };
-    </script>
-                <!-- myNavigator -->
+        </script>
+        <!-- myNavigator -->
         <ons-navigator title="Navigator" id="myNavigator" page="login.html">
         </ons-navigator>
-</ons-page>
+    </ons-page>
 
-<!--メニュー画面-------------------------------------------------------------------------------------------------------->
-<ons-template id="navigator.html">
-    <!-- myNavigator -->
-    <ons-navigator title="Navigator" id="myNavigator" page="login.html">
-    </ons-navigator>
-</ons-template>
+    <!--メニュー画面-------------------------------------------------------------------------------------------------------->
+    <ons-template id="navigator.html">
+        <!-- myNavigator -->
+        <ons-navigator title="Navigator" id="myNavigator" page="login.html">
+        </ons-navigator>
+    </ons-template>
 
-<template id="home.html">
-    <ons-page id="home">
-        <script>
-            ons.getScriptPage().onInit = function() {
-                this.onShow = function() {
-                    pagenavi.init();
-                    loadRectBanner();
-                    loadIndexBanner();
-                    menuObj.loadCategoryCount();
-                    menuObj.loadAnswerRank();
-                    bookmarkObj.init();
+    <template id="home.html">
+        <ons-page id="home">
+            <script>
+                ons.getScriptPage().onInit = function () {
+                    this.onShow = function () {
+                        pagenavi.init();
+                        loadRectBanner();
+                        loadIndexBanner();
+                        menuObj.loadCategoryCount();
+                        menuObj.loadAnswerRank();
+                        bookmarkObj.init();
 
+                    };
+                    menuObj.loadMenu();
                 };
-                menuObj.loadMenu();
-            };
-        </script>
+            </script>
 
 
-        <div align="center"><img src="./images/main_image.png"  style="max-width:70%; height:auto;" /></div>
-        <center><table style="width:95%; height:auto;" border-style:none;>
-        <td class="main_btn"><div class="main_btn" align="center" onclick="document.querySelector('#myNavigator').pushPage('errataTable.html');">正誤表</div></td></table></center>
+            <div align="center"><img src="./images/main_image.png" style="max-width:70%; height:auto;" /></div>
+            <center>
+                <table style="width:95%; height:auto;" border-style:none;>
+                    <td class="main_btn">
+                        <div class="main_btn" align="center"
+                            onclick="document.querySelector('#myNavigator').pushPage('errataTable.html');">正誤表</div>
+                    </td>
+                </table>
+            </center>
 
-        <div class="content-padded">
-        <div id="home-btnDisplay"></div>
-        <br><br><br>
-            <!-- <div style="height:2px"></div>
+            <div class="content-padded">
+                <div id="home-btnDisplay"></div>
+                <br><br><br>
+                <!-- <div style="height:2px"></div>
             <ons-fab id="sound_btn" onclick="toggleSoundFlag(this);">
                 <ons-icon icon="md-volume-up" size="50px" style="display:block" id="sound_on"></ons-icon>
                 <ons-icon icon="md-volume-off" size="50px" style="display:none"  id="sound_off"></ons-icon>
             </ons-fab>
         </div> -->
-        <span id="new_nend_wrapper_index_footer" class="new_nend_wrapper_index_footer bannerdiv"></span>
-    </ons-page>
-</template>
+                <span id="new_nend_wrapper_index_footer" class="new_nend_wrapper_index_footer bannerdiv"></span>
+        </ons-page>
+    </template>
 
 
-<template id="category.html">
-    <ons-page id="category">
-        <script>
-            ons.getScriptPage().onInit = function() {
-                this.onShow = function() {
-                    //menuObj.loadSubMenu("TTuuKanGyouHouQuiz","")
+    <template id="category.html">
+        <ons-page id="category">
+            <script>
+                ons.getScriptPage().onInit = function () {
+                    this.onShow = function () {
+                        //menuObj.loadSubMenu("TTuuKanGyouHouQuiz","")
+                    };
+
                 };
-                
-            };
-        </script>
-        <ons-toolbar>
-            <div class="left">
-                <ons-button modifier="quiet" onclick="pagenavi.resetToPage('home.html','none');">TOP</ons-button>
-            </div>
-            <div id="question-titleCategory_1" class="titleCategory_1 center"></div>
-        </ons-toolbar>
-        <center><table style="width:95%; height:auto;" border-style:none;>
-        <td class="main_btn"><div class="main_btn" align="center" onclick="document.querySelector('#myNavigator').pushPage('errataTable.html');">正誤表</div></td></table></center>
+            </script>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-button modifier="quiet" onclick="pagenavi.resetToPage('home.html','none');">TOP</ons-button>
+                </div>
+                <div id="question-titleCategory_1" class="titleCategory_1 center"></div>
+            </ons-toolbar>
+            <center>
+                <table style="width:95%; height:auto;" border-style:none;>
+                    <td class="main_btn">
+                        <div class="main_btn" align="center"
+                            onclick="document.querySelector('#myNavigator').pushPage('errataTable.html');">正誤表</div>
+                    </td>
+                </table>
+            </center>
 
-        <div class="content-padded">
-        <div id="category-btnDisplay"></div>
-        <br><br><br>
-            <!-- <div style="height:2px"></div>
+            <div class="content-padded">
+                <div id="category-btnDisplay"></div>
+                <br><br><br>
+                <!-- <div style="height:2px"></div>
             <ons-fab id="sound_btn" onclick="toggleSoundFlag(this);">
                 <ons-icon icon="md-volume-up" size="50px" style="display:block" id="sound_on"></ons-icon>
                 <ons-icon icon="md-volume-off" size="50px" style="display:none"  id="sound_off"></ons-icon>
             </ons-fab>
         </div> -->
-        <span id="new_nend_wrapper_index_footer" class="new_nend_wrapper_index_footer bannerdiv"></span>
-    </ons-page>
-</template>
+                <span id="new_nend_wrapper_index_footer" class="new_nend_wrapper_index_footer bannerdiv"></span>
+        </ons-page>
+    </template>
 
-<!--ログイン画面---------------------------------------------------------------------------------------------------------->
-<template id="login.html">
-<ons-page>  
-    <ons-toolbar>
-          <div class="center">会員認証</div>
-    </ons-toolbar>
-                        <center>
+    <!--ログイン画面---------------------------------------------------------------------------------------------------------->
+    <template id="login.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">会員認証</div>
+            </ons-toolbar>
+            <center>
                 <h1 class="contact-title">ログイン</h1>
                 <p>IDとPasswordをご入力の上<br>「log in」ボタンをタップしてください</p>
             </center>
-<div class="box11">
-      <p style="text-align: center;">
-        <br><br>
-        <ons-input type="id" id="id" modifier="underbar" placeholder="ID" float></ons-input><br><br><br>
-        <ons-input type="password" id="password" modifier="underbar" placeholder="Password" float ></ons-input><br><br>
-</div>
-        <p style="text-align: center;">
-            <ons-button onclick="nextPage();">log in</ons-button>
-        </p>
-    </p>
+            <div class="box11">
+                <p style="text-align: center;">
+                    <br><br>
+                    <ons-input type="id" id="id" modifier="underbar" placeholder="ID" float></ons-input><br><br><br>
+                    <ons-input type="password" id="password" modifier="underbar" placeholder="Password"
+                        float></ons-input><br><br>
+            </div>
+            <p style="text-align: center;">
+                <ons-button onclick="nextPage();">log in</ons-button>
+            </p>
+            </p>
 
-</ons-page>
-</template>
-
-
-
-<!--ロード画面---------------------------------------------------------------------------------------------------------->
-<ons-modal direction="up">
-    <div style="text-align: center">
-      <p>
-        <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
-      </p>
-    </div>
-</ons-modal>
+        </ons-page>
+    </template>
 
 
-<!--
+
+    <!--ロード画面---------------------------------------------------------------------------------------------------------->
+    <ons-modal direction="up">
+        <div style="text-align: center">
+            <p>
+                <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+            </p>
+        </div>
+    </ons-modal>
+
+
+    <!--
 【新】不正解ボタン
 <button><div onclick="quizObj.wrongAnswer()">1</div></button>
 <button><div onclick="quizObj.wrongAnswer()">2</div></button>
@@ -274,215 +276,204 @@
 <button><div onclick="quizObj.rightAnswer()">4</div></button>
 <button><div onclick="quizObj.rightAnswer()">5</div></button> -->
 
-<!--ダイアログ---------------------------------------------------------------------------------------------------------->
-<template id="preDialog.html">
-    <ons-dialog cancelable id="preDialog" class="preDialog">
-      <div class="preDialogContent">
-        <div class="preDialogContentIn">
-            <div id="preDialog-title"></div>
-            <br><br><br><br>
-            <form onsubmit="dialogObj.quizStart(); return false;"> <!-- submit後遷移しないように　return false;-->
-               <div class="option">
-                    <div style="width:70%">出題年度</div>
-                    <div>
-                        <!-- <ons-input type="number" class="preDialogQuestionCountInput" id="preDialog-questionCountInput" modifier="underbar" min="1"></ons-input> -->
+    <!--ダイアログ---------------------------------------------------------------------------------------------------------->
+    <template id="preDialog.html">
+        <ons-dialog cancelable id="preDialog" class="preDialog">
+            <div class="preDialogContent">
+                <div class="preDialogContentIn">
+                    <div id="preDialog-title"></div>
+                    <br><br><br><br>
+                    <form onsubmit="dialogObj.quizStart(); return false;"> <!-- submit後遷移しないように　return false;-->
+                        <div class="option">
+                            <div style="width:70%">出題年度</div>
+                            <div>
+                                <!-- <ons-input type="number" class="preDialogQuestionCountInput" id="preDialog-questionCountInput" modifier="underbar" min="1"></ons-input> -->
 
-                        <select id="preDialog-questionExamTimesSelect" class="select-input" >
-                        </select>
-                    </div>
+                                <select id="preDialog-questionExamTimesSelect" class="select-input">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div style="width:70%">出題</div>
+                            <div>
+                                <ons-input type="number" class="preDialogQuestionCountInput"
+                                    id="preDialog-questionCountInput" modifier="underbar" min="1"></ons-input>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div style="width:70%">開始位置</div>
+                            <ons-input type="number" class="preDialogStartPosInput" id="preDialog-startPosInput"
+                                modifier="underbar" min="1">
+                            </ons-input>
+                        </div>
+                        <div class="option">
+                            <div>出題順をランダムにする</div>
+                            <div class="preDialogRandamSwitch">
+                                <ons-switch id="preDialog-randamSwitch"></ons-switch>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div>間違えた問題のみ出題する</div>
+                            <div class="preDialogMistakeQuizOnlySwitch">
+                                <ons-switch id="preDialog-mistakeQuizOnlySwitch"></ons-switch>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div>正解時も解説を表示する</div>
+                            <div class="preDialogDisplayExplanationByCorrect">
+                                <ons-switch id="preDialog-displayExplanationByCorrect" checked></ons-switch>
+                            </div>
+                        </div>
+                        <div class="preDialogButtons">
+                            <div>
+                                <button type="submit" class="preDialogButton startButton">スタート</ons-button>
+                            </div>
+                            <div>
+                                <ons-button class="preDialogButton"
+                                    onclick="dialogObj.hide('preDialog')">Close</ons-button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="option">
-                    <div style="width:70%">出題</div>
-                    <div>
-                        <ons-input type="number" class="preDialogQuestionCountInput" id="preDialog-questionCountInput" modifier="underbar" min="1"></ons-input>
-                    </div>
-                </div>
-                <div class="option">
-                    <div style="width:70%">開始位置</div>
-                        <ons-input type="number" class="preDialogStartPosInput" id="preDialog-startPosInput" modifier="underbar" min="1">
-                    </ons-input>
-                </div>
-                <div class="option">
-                    <div>出題順をランダムにする</div>
-                    <div class="preDialogRandamSwitch">
-                        <ons-switch id="preDialog-randamSwitch"></ons-switch>
-                    </div>
-                </div>
-                <div class="option">
-                    <div>重要度ランク選択</div>
-                    <div class="importance-rank-selection">
-                        <label class="checkbox">
-                            <ons-checkbox input-id="rank-a" name="importanceRank" value="A"></ons-checkbox>
-                            <span>Aランク</span>
-                        </label>
-                        <label class="checkbox">
-                            <ons-checkbox input-id="rank-b" name="importanceRank" value="B"></ons-checkbox>
-                            <span>Bランク</span>
-                        </label>
-                        <label class="checkbox">
-                            <ons-checkbox input-id="rank-c" name="importanceRank" value="C"></ons-checkbox>
-                            <span>Cランク</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="option">
-                    <div>間違えた問題のみ出題する</div>
-                    <div class="preDialogMistakeQuizOnlySwitch">
-                        <ons-switch id="preDialog-mistakeQuizOnlySwitch"></ons-switch>
-                    </div>
-                </div>
-                <div class="option">
-                    <div>正解時も解説を表示する</div>
-                    <div class="preDialogDisplayExplanationByCorrect">
-                        <ons-switch id="preDialog-displayExplanationByCorrect" checked></ons-switch>
-                    </div>
-                </div>
-                <div class="preDialogButtons">
-                    <div>
-                        <button type="submit" class="preDialogButton startButton">スタート</ons-button>
-                    </div>
-                    <div>
-                        <ons-button class="preDialogButton" onclick="dialogObj.hide('preDialog')">Close</ons-button>
-                    </div>
-                </div>
-            </form>
-        </div>
-      </div>
-    </ons-dialog>
-</template>
+            </div>
+        </ons-dialog>
+    </template>
 
-<template id="confirmDialog.html">
-    <ons-alert-dialog id="confirm-dialog" modifier="rowfooter">
-        <div class="alert-dialog-title">確認</div>
-        <div class="alert-dialog-content" id="confirmMessage-dialog">
-        </div>
-        <div class="alert-dialog-footer">
-            <ons-alert-dialog-button onclick="dialogObj._showLoadStoredDataDialog()">OK</ons-alert-dialog-button>
-        <ons-alert-dialog-button onclick="dialogObj.hideLoadStoredDataDialog()">キャンセル</ons-alert-dialog-button>
-        </div>
-    </ons-alert-dialog>
-</template>
+    <template id="confirmDialog.html">
+        <ons-alert-dialog id="confirm-dialog" modifier="rowfooter">
+            <div class="alert-dialog-title">確認</div>
+            <div class="alert-dialog-content" id="confirmMessage-dialog">
+            </div>
+            <div class="alert-dialog-footer">
+                <ons-alert-dialog-button onclick="dialogObj._showLoadStoredDataDialog()">OK</ons-alert-dialog-button>
+                <ons-alert-dialog-button onclick="dialogObj.hideLoadStoredDataDialog()">キャンセル</ons-alert-dialog-button>
+            </div>
+        </ons-alert-dialog>
+    </template>
 
-<!--問題--------------------------------------------------------------------------------------------------------------->
-<template id="quiz.html">
-    <ons-page>
-        <script>
-            ons.getScriptPage().onInit = function() {
-                this.onShow = function() {
-                    startTimer(1);
-                    loadQuizBanner();
+    <!--問題--------------------------------------------------------------------------------------------------------------->
+    <template id="quiz.html">
+        <ons-page>
+            <script>
+                ons.getScriptPage().onInit = function () {
+                    this.onShow = function () {
+                        startTimer(1);
+                        loadQuizBanner();
 
+                    };
+                    this.onHide = function () {
+                        banner_quiz_header = $('.new_nend_wrapper_quiz_header').html();
+                        banner_quiz_middle = $('.new_nend_wrapper_quiz_middle').html();
+                        banner_quiz_footer = $('.new_nend_wrapper_quiz_footer').html();
+                        stopTimer();
+                    }
                 };
-                this.onHide = function()
-                {
-                    banner_quiz_header = $('.new_nend_wrapper_quiz_header').html();
-                    banner_quiz_middle = $('.new_nend_wrapper_quiz_middle').html();
-                    banner_quiz_footer = $('.new_nend_wrapper_quiz_footer').html();
-                    stopTimer();
-                }
-            };
-        </script>
-        <ons-toolbar>
-            <div class="left">
-                <ons-button modifier="quiet" onclick="questionObj.backPage();">戻る</ons-button>
-            </div>
-            <div id="question-titleCategory_1" class="titleCategory_1 center"></div>
-        </ons-toolbar>
-        <div id="question-1-1" class="quiz-page">
-            <div id='question-progress_1' class="question_progress"></div>
-            <div class="about-panel" style="font-size:0.8em;"
-                >問題<span id="question-quizSeq_1"></span>. 【<span id="question-categoryName_1"></span
-                >】第<span id="question-examTimes_1"></span
-                >回第<span id="question-mainQuestionSeq_1"></span
-                >問-<span id="question-subQuestionSeq_1"></span>
-                <div id="question-question_1"></div>
-                <div id="question-selection_1"></div>
-            </div>
+            </script>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-button modifier="quiet" onclick="questionObj.backPage();">戻る</ons-button>
+                </div>
+                <div id="question-titleCategory_1" class="titleCategory_1 center"></div>
+            </ons-toolbar>
+            <div id="question-1-1" class="quiz-page">
+                <div id='question-progress_1' class="question_progress"></div>
+                <div class="about-panel" style="font-size:0.8em;">問題<span id="question-quizSeq_1"></span>. 【<span
+                        id="question-categoryName_1"></span>】第<span id="question-examTimes_1"></span>回第<span
+                        id="question-mainQuestionSeq_1"></span>問-<span id="question-subQuestionSeq_1"></span>
+                    <div id="question-question_1"></div>
+                    <div id="question-selection_1"></div>
+                </div>
 
-            <div style="padding:2px; background-color: transparent;">
-                <ons-progress-bar value="0" modifier="material" id="ons_progress_1"></ons-progress-bar>
+                <div style="padding:2px; background-color: transparent;">
+                    <ons-progress-bar value="0" modifier="material" id="ons_progress_1"></ons-progress-bar>
+                </div>
+                <div id="question-selectionButtons_1" class="content-padded answer_panel"></div>
             </div>
-            <div id="question-selectionButtons_1" class="content-padded answer_panel"></div>
-        </div>
-        <input type="hidden" id="end_message_1" value="">
-        <div class="content-padded end_message answer_result_panel">
-            <span class="answer_result" id="answer_result_1"></span>
-            <div>&nbsp;</div>
-            <div>正答：<span id="question-answerKey_1"></span></div>
-            <div>&nbsp;</div>
-            <div>&nbsp;</div>
-            <div id="question-explanation_1"></div>
-            <div>&nbsp;</div>
-            <div>&nbsp;</div>
-            <ons-button id="question-afterAnswerButton_1" onclick="quizObj.afterAnswer()" modifier="large"></ons-button>
-        </div>
-        <div id="question-bookmark_1" class="content-padded bookmark_panel"><span class="star">⭐</span><a href="#" onclick="bookmarkObj.addremove(this.parentNode)">ブックマーク</a></div>
-    </ons-page>
-</template>
+            <input type="hidden" id="end_message_1" value="">
+            <div class="content-padded end_message answer_result_panel">
+                <span class="answer_result" id="answer_result_1"></span>
+                <div>&nbsp;</div>
+                <div>正答：<span id="question-answerKey_1"></span></div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div id="question-explanation_1"></div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <ons-button id="question-afterAnswerButton_1" onclick="quizObj.afterAnswer()"
+                    modifier="large"></ons-button>
+            </div>
+            <div id="question-bookmark_1" class="content-padded bookmark_panel"><span class="star">⭐</span><a href="#"
+                    onclick="bookmarkObj.addremove(this.parentNode)">ブックマーク</a></div>
+        </ons-page>
+    </template>
 
-<!--最終結果------------------------------------------------------------------------------------------------------------>
-<template id="finish.html">
-    <ons-page>
-        <script>
-            ons.getScriptPage().onInit = function() {
-                this.onShow = function() {
-                    loadFinishBanner();
-                    document.querySelector('#toolbar-title').innerHTML = '【新】通関士試験';
-                    document.querySelector('#question_count').innerHTML = quizObj.quizCount;
-                    document.querySelector('#right_count').innerHTML = quizObj.rightCount;
-                    document.querySelector('#ratio').innerHTML = quizObj.getRatio();
-                    document.querySelector('#rank_title').innerHTML = quizObj.getRank();
-                    document.querySelector('#rank_comment').innerHTML = quizObj.getComment();
+    <!--最終結果------------------------------------------------------------------------------------------------------------>
+    <template id="finish.html">
+        <ons-page>
+            <script>
+                ons.getScriptPage().onInit = function () {
+                    this.onShow = function () {
+                        loadFinishBanner();
+                        document.querySelector('#toolbar-title').innerHTML = '【新】通関士試験';
+                        document.querySelector('#question_count').innerHTML = quizObj.quizCount;
+                        document.querySelector('#right_count').innerHTML = quizObj.rightCount;
+                        document.querySelector('#ratio').innerHTML = quizObj.getRatio();
+                        document.querySelector('#rank_title').innerHTML = quizObj.getRank();
+                        document.querySelector('#rank_comment').innerHTML = quizObj.getComment();
+                    };
                 };
-            };
-        </script>
+            </script>
 
-        <ons-toolbar>
-            <div class="left">
-                <ons-button modifier="quiet"  onclick="pagenavi.resetToPage('category.html', 'slide' ,function(){menuObj.loadSubMenu()} );">戻る</ons-button>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-button modifier="quiet"
+                        onclick="pagenavi.resetToPage('category.html', 'slide' ,function(){menuObj.loadSubMenu()} );">戻る</ons-button>
+                </div>
+                <div class="center" id="toolbar-title"></div>
+            </ons-toolbar>
+            <div class="about-panel">
+                <div align="center"><span id="rank_title"></span></div>
+                <span id="rank_comment"></span>
+                <div align="center" id="rank_ratio">
+                    <span id="question_count"></span>問中<span id="right_count"></span>問正解
+                    <br />
+                    正解率 <span id="ratio"></span>%
+                </div>
             </div>
-            <div class="center" id="toolbar-title"></div>
-        </ons-toolbar>
-        <div class="about-panel">
-            <div align="center"><span id="rank_title"></span></div>
-            <span id="rank_comment"></span>
-            <div align="center" id="rank_ratio">
-                <span id="question_count"></span>問中<span id="right_count"></span>問正解
-                <br />
-                正解率 <span id="ratio"></span>%
-            </div>
-        </div>
-        <ons-button onclick="pagenavi.resetToPage('category.html', 'slide' ,function(){menuObj.loadSubMenu()} );" modifier="large"  id="finish_btn_2">戻る</ons-button>
-            </ons-page>
-</template>
+            <ons-button onclick="pagenavi.resetToPage('category.html', 'slide' ,function(){menuObj.loadSubMenu()} );"
+                modifier="large" id="finish_btn_2">戻る</ons-button>
+        </ons-page>
+    </template>
 
-<!--正誤表-------------------------------------------------------------------------------------------------------------->
-<template id="errataTable.html">
-    <ons-page id="errataTable">
-        <script>
-            errataTableObj.init();
-        </script>
-        <ons-toolbar>
-        <div class="left">
-            <ons-button modifier="quiet"  onclick="myNavigator.resetToPage('home.html');">TOP</ons-button>
-        </div>
-            <div class="titleCategory_1 center">正誤表</div>
-        </ons-toolbar>
-        <ons-select id="errataTable-select" class="errataTableSelect" onchange="errataTableObj._changeCategorySelect(event)"></ons-select>
-        <div id="errataTable-itemContainer">
-            <ons-list id="errataTable-times">
-                <ons-row class="errataTableRow">
-                    <ons-col class="errataTableCol errataFirstCol"> </ons-col>
-                    <ons-col class="errataTableCol errataCol">1回目</ons-col>
-                    <ons-col class="errataTableCol errataCol">2回目</ons-col>
-                    <ons-col class="errataTableCol errataCol">3回目</ons-col>
-                    <ons-col class="errataTableCol errataCol">4回目</ons-col>
-                    <ons-col class="errataTableCol errataCol">5回目</ons-col>
-                </ons-row>
-            </ons-list>
-            <ons-list id="errataTable-items"></ons-list>
-        </div>
-    </ons-page>
-</template>
+    <!--正誤表-------------------------------------------------------------------------------------------------------------->
+    <template id="errataTable.html">
+        <ons-page id="errataTable">
+            <script>
+                errataTableObj.init();
+            </script>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-button modifier="quiet" onclick="myNavigator.resetToPage('home.html');">TOP</ons-button>
+                </div>
+                <div class="titleCategory_1 center">正誤表</div>
+            </ons-toolbar>
+            <ons-select id="errataTable-select" class="errataTableSelect"
+                onchange="errataTableObj._changeCategorySelect(event)"></ons-select>
+            <div id="errataTable-itemContainer">
+                <ons-list id="errataTable-times">
+                    <ons-row class="errataTableRow">
+                        <ons-col class="errataTableCol errataFirstCol"> </ons-col>
+                        <ons-col class="errataTableCol errataCol">1回目</ons-col>
+                        <ons-col class="errataTableCol errataCol">2回目</ons-col>
+                        <ons-col class="errataTableCol errataCol">3回目</ons-col>
+                        <ons-col class="errataTableCol errataCol">4回目</ons-col>
+                        <ons-col class="errataTableCol errataCol">5回目</ons-col>
+                    </ons-row>
+                </ons-list>
+                <ons-list id="errataTable-items"></ons-list>
+            </div>
+        </ons-page>
+    </template>
 </body>
+
 </html>
