@@ -9,8 +9,8 @@ function checkTableDataExists(tableName) {
     if (/[^\w-]/.test(tableName)) {
       console.error(`不正なテーブル名: ${tableName}`);
       return resolve(false);
-    }    
-    var db = window.sqlitePlugin.openDatabase({ name: setting.dbName, location: 'default' });    
+    }
+    var db = window.sqlitePlugin.openDatabase({ name: setting.dbName, location: 'default' });
 
     db.transaction(function (tx) {
       var query = `SELECT COUNT(*) AS cnt FROM \`${tableName}\``;
@@ -36,8 +36,8 @@ function checkTableDataExists(tableName) {
  * ２．行の改行コードは[CRLF]、セルの文字列内は[LF]になっている。 
  */
 const readAllCsv = function (isRead) {
-  // CSVタイトル項目数 (重要度カラムを追加したため7に変更)
-  const CSV_TITLE_COLUMN_NUM = 7;
+  // CSVタイトル項目数
+  const CSV_TITLE_COLUMN_NUM = 6;
   // CSVカラム順(問題番号)
   const CSV_QUESTION_NUMBER_COLUMN_INDEX = 1;
   // CSVの行開始番号
@@ -86,21 +86,19 @@ const readAllCsv = function (isRead) {
        * テーブル作成
        * @return {Promise}
        */
-      init: function() {
-          
+      init: function () {
+
         var queryStr = '';
         var primaryKeyStr = '';
         var keys = Object.keys(setting.TQuizCreateQuery);
-        for (var i = 0; i < keys.length; i++)
-        {
-            
+        for (var i = 0; i < keys.length; i++) {
+
           var value = setting.TQuizCreateQuery[keys[i]];
-          if(keys[i] != "primaryKeys"){
+          if (keys[i] != "primaryKeys") {
             queryStr = queryStr + ' ' + value + ',';
           } else {
-            for (var ii = 0; ii < value.length; ii++)
-            {
-              if(primaryKeyStr == ''){
+            for (var ii = 0; ii < value.length; ii++) {
+              if (primaryKeyStr == '') {
                 primaryKeyStr = ' PRIMARY KEY(';
               }
               var separate2 = ii == value.length - 1 ? '' : ',';
@@ -117,17 +115,17 @@ const readAllCsv = function (isRead) {
               tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TAnswerHistry + '(' + setting.TAnswerHistryCreateQuery + ')');
               tx.executeSql('DROP TABLE IF EXISTS ' + setting.TAnswerCountHistry);
               tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TAnswerCountHistry + '(' + setting.TAnswerCountHistryInsertQuery + ')');
-            // }
-            
-            tx.executeSql('DROP TABLE IF EXISTS ' + setting.TTuuKanGyouHouQuiz);
-            tx.executeSql('DROP TABLE IF EXISTS ' + setting.TTuuKanJituMuQuiz);
-            tx.executeSql('DROP TABLE IF EXISTS ' + setting.TKaiGyouHouQuiz);
-            tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TTuuKanGyouHouQuiz + '(' + queryStr + primaryKeyStr + ')');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TTuuKanJituMuQuiz + '(' + queryStr + primaryKeyStr + ')');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TKaiGyouHouQuiz + '(' + queryStr + primaryKeyStr + ')');
+              // }
 
-            tx.executeSql('DROP TABLE IF EXISTS ' + setting.TAllAnswerCountHistry);
-            tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TAllAnswerCountHistry + '(' + setting.TAllAnswerHistryCreateQuery + ')');
+              tx.executeSql('DROP TABLE IF EXISTS ' + setting.TTuuKanGyouHouQuiz);
+              tx.executeSql('DROP TABLE IF EXISTS ' + setting.TTuuKanJituMuQuiz);
+              tx.executeSql('DROP TABLE IF EXISTS ' + setting.TKaiGyouHouQuiz);
+              tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TTuuKanGyouHouQuiz + '(' + queryStr + primaryKeyStr + ')');
+              tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TTuuKanJituMuQuiz + '(' + queryStr + primaryKeyStr + ')');
+              tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TKaiGyouHouQuiz + '(' + queryStr + primaryKeyStr + ')');
+
+              tx.executeSql('DROP TABLE IF EXISTS ' + setting.TAllAnswerCountHistry);
+              tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TAllAnswerCountHistry + '(' + setting.TAllAnswerHistryCreateQuery + ')');
             }
 
             tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TAllAnswerCountHistry + '(' + setting.TAllAnswerHistryCreateQuery + ')');
@@ -138,134 +136,134 @@ const readAllCsv = function (isRead) {
               if (useSqlite) {
                 var resultRow = results.rows.item(0).sql;
               } else {
-                var resultRow = results.rows[0].sql;          
+                var resultRow = results.rows[0].sql;
               }
-              if( resultRow.match(/answer_1_date/) === null ){
-                for (var i = 0; i < setting.AddTAnswerHistryCreateQuery.length ; i++) {
-                  tx.executeSql('ALTER TABLE '+ setting.TAnswerHistry +' ADD  ' +  setting.AddTAnswerHistryCreateQuery[i] + ' ');
-                }              
+              if (resultRow.match(/answer_1_date/) === null) {
+                for (var i = 0; i < setting.AddTAnswerHistryCreateQuery.length; i++) {
+                  tx.executeSql('ALTER TABLE ' + setting.TAnswerHistry + ' ADD  ' + setting.AddTAnswerHistryCreateQuery[i] + ' ');
+                }
               }
             });
             console.log('--------------db----------------');
 
             //TBookMarkの追加
-            tx.executeSql('CREATE TABLE IF NOT EXISTS ' +  setting.TBookMark + '(' + setting.TBookMarkCreateQuery + ')');// add 2023-01-31 ex
-            
+            tx.executeSql('CREATE TABLE IF NOT EXISTS ' + setting.TBookMark + '(' + setting.TBookMarkCreateQuery + ')');// add 2023-01-31 ex
+
             //TAnswerHistryのtable作り直し           
-            tx.executeSql('SELECT sql  FROM sqlite_master where tbl_name="' +  setting.TAnswerHistry + '"  AND type = "table" ',[],function (tx, results) {
-                console.log(["results",results]);
-                if (useSqlite) {
-                    var resultRow = results.rows.item(0).sql ;
-                }else{
-                    var resultRow = results.rows[0].sql;
-                }
-              if( resultRow.match(/dataType/) === null ){
+            tx.executeSql('SELECT sql  FROM sqlite_master where tbl_name="' + setting.TAnswerHistry + '"  AND type = "table" ', [], function (tx, results) {
+              console.log(["results", results]);
+              if (useSqlite) {
+                var resultRow = results.rows.item(0).sql;
+              } else {
+                var resultRow = results.rows[0].sql;
+              }
+              if (resultRow.match(/dataType/) === null) {
                 console.log("hurui");
                 TAnswerHistryDBRemake.dbremake = true;
                 TAnswerHistryDBRemake.getalldata(tx);
                 //TAnswerHistryDBRemake.droptable(tx);  
-                TAnswerHistryDBRemake.createtable(tx);  
+                TAnswerHistryDBRemake.createtable(tx);
 
-                setTimeout(function(){
-                  db.transaction( function(tx2) {                 
-                  TAnswerHistryDBRemake.setdata(tx2);       
+                setTimeout(function () {
+                  db.transaction(function (tx2) {
+                    TAnswerHistryDBRemake.setdata(tx2);
                   });
-                },500);
+                }, 500);
               }
             });
-            
-            //TAnswerCountHistryのtable作り直し           
-            
-            tx.executeSql('SELECT sql  FROM sqlite_master where tbl_name="' +  setting.TAnswerCountHistry + '"  AND type = "table" ',[],function (tx, results) {
 
-            if (useSqlite) {
-                var resultRow = results.rows.item(0).sql ;
-            }else{
+            //TAnswerCountHistryのtable作り直し           
+
+            tx.executeSql('SELECT sql  FROM sqlite_master where tbl_name="' + setting.TAnswerCountHistry + '"  AND type = "table" ', [], function (tx, results) {
+
+              if (useSqlite) {
+                var resultRow = results.rows.item(0).sql;
+              } else {
                 var resultRow = results.rows[0].sql;
-            }
-              if( resultRow.match(/dataType/) === null ){
+              }
+              if (resultRow.match(/dataType/) === null) {
                 TAnswerCountHistryDBRemake.dbremake = true;
                 TAnswerCountHistryDBRemake.getalldata(tx);
                 //TAnswerCountHistryDBRemake.droptable(tx);  
-                TAnswerCountHistryDBRemake.createtable(tx);  
+                TAnswerCountHistryDBRemake.createtable(tx);
 
-                setTimeout(function(){
-                  db.transaction( function(tx2) {                 
-                  TAnswerCountHistryDBRemake.setdata(tx2);       
+                setTimeout(function () {
+                  db.transaction(function (tx2) {
+                    TAnswerCountHistryDBRemake.setdata(tx2);
                   });
-                },500);
+                }, 500);
               }
             });
 
-          }, function(error) {
-              console.log(["eratta",error.message])
+          }, function (error) {
+            console.log(["eratta", error.message])
             reject(error.message);
-          }, function() {
+          }, function () {
             console.log('init success');
             resolve();
           });
         });
       },
 
-      import: function(questionCSVNames, quizCSVFilePaths, categoryQuizSeqMap) {
-        return new Promise(function(resolve, reject) {
+      import: function (questionCSVNames, quizCSVFilePaths, categoryQuizSeqMap) {
+        return new Promise(function (resolve, reject) {
           // ファイル読み込み
           var quizCSVFilePath = quizCSVFilePaths[0];
           var questionCSVName = questionCSVNames[0];
           var filePath = quizCSVFilePath + questionCSVName + '.csv';
-//          var req = _getFile(filePath);
+          //          var req = _getFile(filePath);
 
-//          req.onload = function() {
+          //          req.onload = function() {
           if (useSqlite) {
-            var _getFileFunc  = _getFilePromise
-          }else{
-            var _getFileFunc  = _getFile;//_getfetchFilePromise
+            var _getFileFunc = _getFilePromise
+          } else {
+            var _getFileFunc = _getFile;//_getfetchFilePromise
           }
-           _getFileFunc(filePath).then((csvdata)=>{
+          _getFileFunc(filePath).then((csvdata) => {
             var csv = _convertToArray(csvdata, categoryQuizSeqMap);
-            db.transaction(function(tx) {
+            db.transaction(function (tx) {
               for (var rowI = 0; rowI < csv.length; rowI++) {
                 var str = csv[rowI][0];
-                if (str !=='') {
+                if (str !== '') {
                   var valuesStr = '';
-                  for (var i = 0; i < TABEL_COLUMN_COUNT; i++){
+                  for (var i = 0; i < TABEL_COLUMN_COUNT; i++) {
                     valuesStr = i != TABEL_COLUMN_COUNT - 1
                       ? valuesStr + '?,'
                       : valuesStr + '?';
                   }
-                  var getImportTableName = function(quizCSVFilePath){
-                      if (!!quizCSVFilePath.includes('tuuKanJituMu')){
-                        return setting.TTuuKanJituMuQuiz;
-                      }
-                      if (!!quizCSVFilePath.includes('tuuKanGyouHou')){
-                        return setting.TTuuKanGyouHouQuiz;
-                      }
-                      if (!!quizCSVFilePath.includes('kaiGyouHou')){
-                        return setting.TKaiGyouHouQuiz;
-                      }
+                  var getImportTableName = function (quizCSVFilePath) {
+                    if (!!quizCSVFilePath.includes('tuuKanJituMu')) {
+                      return setting.TTuuKanJituMuQuiz;
+                    }
+                    if (!!quizCSVFilePath.includes('tuuKanGyouHou')) {
+                      return setting.TTuuKanGyouHouQuiz;
+                    }
+                    if (!!quizCSVFilePath.includes('kaiGyouHou')) {
+                      return setting.TKaiGyouHouQuiz;
+                    }
                   };
-                  if(isRead){
-                  //tx.executeSql('REPLACE INTO ' + getImportTableName(quizCSVFilePath) + ' VALUES (' + valuesStr + ')', csv[rowI]);
-                  //tx.executeSql('insert or ignore into ' + getImportTableName(quizCSVFilePath) + ' VALUES (' + valuesStr + ')', csv[rowI]);
-                   //tx.executeSql(_createUpdateQuestionQuery(true,getImportTableName(quizCSVFilePath) ,csv[rowI]));
-                   var queryStr;
-                   if(queryStr = _createUpdateQuestionQuery(getImportTableName(quizCSVFilePath) ,csv[rowI])){
-                   tx.executeSql(queryStr, [], function (tx, results) {
-              
-                    //if(results.rows.length!=1){
-                    //  console.log("l=")
-                    //}
-                   
-                  });
-                  }
-                  }else{
+                  if (isRead) {
+                    //tx.executeSql('REPLACE INTO ' + getImportTableName(quizCSVFilePath) + ' VALUES (' + valuesStr + ')', csv[rowI]);
+                    //tx.executeSql('insert or ignore into ' + getImportTableName(quizCSVFilePath) + ' VALUES (' + valuesStr + ')', csv[rowI]);
+                    //tx.executeSql(_createUpdateQuestionQuery(true,getImportTableName(quizCSVFilePath) ,csv[rowI]));
+                    var queryStr;
+                    if (queryStr = _createUpdateQuestionQuery(getImportTableName(quizCSVFilePath), csv[rowI])) {
+                      tx.executeSql(queryStr, [], function (tx, results) {
+
+                        //if(results.rows.length!=1){
+                        //  console.log("l=")
+                        //}
+
+                      });
+                    }
+                  } else {
                     tx.executeSql('REPLACE INTO ' + getImportTableName(quizCSVFilePath) + ' VALUES (' + valuesStr + ')', csv[rowI]);
                   }
                 }
               }
-            }, function(error) {
+            }, function (error) {
               reject(error.message);
-            }, function() {
+            }, function () {
               {
                 importCount++;
                 console.log('import success: ' + importCount + ' / ' + setting.quizCSVFilePaths.length * setting.questionCSVNames.length);
@@ -301,49 +299,49 @@ const readAllCsv = function (isRead) {
     }
 
     // プライべートな関数を定義
-/*
-    UPSERT用のSQL 作成
-*/
-    function _createUpdateQuestionQuery(table,row){
-      var queryStr="";
-    
-        queryStr = 'UPDATE '+ table ;//name = "細田", age = 30 WHERE id = 5';
-        //queryStr = 'SELECT * from ' + table;
-        updateStr =' SET ';
-        whereStr = ' WHERE ';
-        var keys = Object.keys(setting.TQuizCreateQuery);
-        for (var i = 0; i < keys.length; i++) {
-          //var value = setting.TQuizCreateQuery[keys[i]];
-          
-            if(keys[i] == "question" ||
-            keys[i] == "stampTwoSelections" ||
-            keys[i] == "selection" ||
-            keys[i] == "answerKey" ||
-            keys[i] == "explanation" 
-            ){
-            updateStr = updateStr + keys[i] + '=' + "'" + row[i] + "',";
-            }else if(keys[i] == "categoryQuizSeq" ||
-            keys[i] == "categoryCode" ||
-            keys[i] == "categoryName" ||
-            keys[i] == "examTimes"
-            //keys[i] == "mainQuestionSeq" ||
-            //keys[i] == "subQuestionSeq" 
-            ){
-              
-              whereStr = whereStr + keys[i] + '=' + (keys[i] == "categoryName" ? "'"+row[i]+"'" : row[i])+ ' AND ';
-            }
-          
-        }
-        //最後の余分な, AND 削除
-        updateStr = updateStr.substring(0, updateStr.length - 1);
-        whereStr = whereStr.substring(0, whereStr.length - 5);
-        if(whereStr.indexOf("NaN")!=-1){
-          return null;
-        }
-       queryStr = queryStr + updateStr + whereStr;  
-       //queryStr = queryStr + whereStr; 
+    /*
+        UPSERT用のSQL 作成
+    */
+    function _createUpdateQuestionQuery(table, row) {
+      var queryStr = "";
 
-      
+      queryStr = 'UPDATE ' + table;//name = "細田", age = 30 WHERE id = 5';
+      //queryStr = 'SELECT * from ' + table;
+      updateStr = ' SET ';
+      whereStr = ' WHERE ';
+      var keys = Object.keys(setting.TQuizCreateQuery);
+      for (var i = 0; i < keys.length; i++) {
+        //var value = setting.TQuizCreateQuery[keys[i]];
+
+        if (keys[i] == "question" ||
+          keys[i] == "stampTwoSelections" ||
+          keys[i] == "selection" ||
+          keys[i] == "answerKey" ||
+          keys[i] == "explanation"
+        ) {
+          updateStr = updateStr + keys[i] + '=' + "'" + row[i] + "',";
+        } else if (keys[i] == "categoryQuizSeq" ||
+          keys[i] == "categoryCode" ||
+          keys[i] == "categoryName" ||
+          keys[i] == "examTimes"
+          //keys[i] == "mainQuestionSeq" ||
+          //keys[i] == "subQuestionSeq" 
+        ) {
+
+          whereStr = whereStr + keys[i] + '=' + (keys[i] == "categoryName" ? "'" + row[i] + "'" : row[i]) + ' AND ';
+        }
+
+      }
+      //最後の余分な, AND 削除
+      updateStr = updateStr.substring(0, updateStr.length - 1);
+      whereStr = whereStr.substring(0, whereStr.length - 5);
+      if (whereStr.indexOf("NaN") != -1) {
+        return null;
+      }
+      queryStr = queryStr + updateStr + whereStr;
+      //queryStr = queryStr + whereStr; 
+
+
       return queryStr;
     }
     /**
@@ -359,32 +357,31 @@ const readAllCsv = function (isRead) {
       return field;
     }
 
-     /**
-      * ファイルを読み込む
-      * @param {string} fileName ファイルパス
-      * @return {XMLHttpRequest} req.onload = function(){} で読み込み完了を判別する
-      */
+    /**
+     * ファイルを読み込む
+     * @param {string} fileName ファイルパス
+     * @return {XMLHttpRequest} req.onload = function(){} で読み込み完了を判別する
+     */
     function _getFile(fileName) {
-      return new Promise(function(resolve, reject) {
-      var req = new XMLHttpRequest();
-      req.open('get', fileName, true);
-      req.send(null);
-      req.onload = function ()
-      { 
-       
-              resolve(req.responseText);
-                
-      }
-     
+      return new Promise(function (resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.open('get', fileName, true);
+        req.send(null);
+        req.onload = function () {
+
+          resolve(req.responseText);
+
+        }
+
       })
     }
     function _getfetchFilePromise(fileName) {
       return fetch(fileName) // (1) リクエスト送信
-      .then(response => response.text()) // (2) レスポンスデータを取得
-      .then(data => { // (3)レスポンスデータを処理
-      return data;
-      });   
-   }
+        .then(response => response.text()) // (2) レスポンスデータを取得
+        .then(data => { // (3)レスポンスデータを処理
+          return data;
+        });
+    }
     // function _getFilePromise(settingsFileName) {
     //   return new Promise(function(resolve, reject) {
     //   // 設定ファイルへのパス（URL）
@@ -465,10 +462,10 @@ const readAllCsv = function (isRead) {
     //   return result;
     // }
 
-    function _addSubCategoryColumn(columns){
+    function _addSubCategoryColumn(columns) {
       var category = columns[TABLE_CATEGORY_NAME_COLUMN_INDEX];
       var subCategoryStart = category.indexOf(SUB_CATEGORY_START_WORD);
-      if(category.indexOf(SUB_CATEGORY_START_WORD) != -1){
+      if (category.indexOf(SUB_CATEGORY_START_WORD) != -1) {
         columns[TABLE_CATEGORY_NAME_COLUMN_INDEX] = category.substr(0, subCategoryStart);
         columns.splice(TABLE_CATEGORY_NAME_COLUMN_INDEX + 1, 0, category.substr(subCategoryStart));
       } else {
@@ -476,7 +473,7 @@ const readAllCsv = function (isRead) {
       }
     }
 
-    function _addStampTwoSelectionsColumn(columns){
+    function _addStampTwoSelectionsColumn(columns) {
       var selection = columns[TABLE_SELECTION_COLUMN_INDEX - 1];
       columns.splice(TABLE_QUESTION_COLUMN_INDEX + 1, 0, selection == setting.twoSelectionStr ? 1 : 0);
     }
@@ -485,14 +482,13 @@ const readAllCsv = function (isRead) {
       var rows = val.split('\r');
       var result = [];
       var columns = [];
-      for (var rowI = BEGIN_CSV_ROW; rowI < rows.length; rowI++)
-      {
+      for (var rowI = BEGIN_CSV_ROW; rowI < rows.length; rowI++) {
         var row = rows[rowI];
         var columnStr = row.split(',');
         if (columnStr.length != CSV_TITLE_COLUMN_NUM) // 文字列としてカンマが扱われている場合
         {
           var strIncludedCammma = [];
-          while(row.indexOf('"') != -1){
+          while (row.indexOf('"') != -1) {
             {
               var startAt = row.indexOf('"');
               row = row.replace(row.substr(startAt, 1), '');
@@ -509,44 +505,35 @@ const readAllCsv = function (isRead) {
           }
           columnStr = row.split(',');
           for (var i = 0; i < columnStr.length; i++) {
-            if (columnStr[i] == 'null' && strIncludedCammma.length > 0){
+            if (columnStr[i] == 'null' && strIncludedCammma.length > 0) {
               columnStr[i] = strIncludedCammma[0];
               strIncludedCammma.shift();
             }
           }
         }
-        for(var columnI = 0; columnI < columnStr.length; columnI++) // レコードを作成
+        for (var columnI = 0; columnI < columnStr.length; columnI++) // レコードを作成
         {
           var column = columnStr[columnI];
-          if(columnI == 0){
-            // セル内の改行と前後空白を除去
-            var categoryName = column.replace(/\n/g,'').trim(); //replaceAll('\n', '');
+          if (columnI == 0) {
+            var categoryName = column.replace(/\n/g, '');//replaceAll('\n', '');
             {
-              // categoryQuizSeqMap に無ければ初期化して続行する（堅牢性向上）
-              if (typeof categoryQuizSeqMap[categoryName] === 'undefined' || categoryQuizSeqMap[categoryName] === null) {
-                console.warn(categoryName + ' でcategoryQuizSeqMapを参照しましたが見つかりませんでした。0で初期化します');
-                categoryQuizSeqMap[categoryName] = 0;
-              }
               var categoryQuizSeq = categoryQuizSeqMap[categoryName] + 1;
+              if (!categoryQuizSeq) {
+                console.log(categoryName + 'でcategoryQuizSeqMapを参照しましたが見つかりませんでした');
+              }
               columns.push(categoryQuizSeq); // categoryQuizOrder
               categoryQuizSeqMap[categoryName] = categoryQuizSeq;
             }
             column = categoryName;
-            // categoryCode が無ければ null を入れて警告
-            var mappedCategoryCode = setting.categoryCodeMap[column];
-            if (typeof mappedCategoryCode === 'undefined') {
-              console.warn(column + ' のcategoryCodeが見つかりません。設定ファイルのキーとCSVの表記を確認してください。');
-              mappedCategoryCode = null;
-            }
-            columns.push(mappedCategoryCode); // categoryCode
+            columns.push(setting.categoryCodeMap[column]); // categoryCode
             columns.push(column); // categoryName
-          } else if(columnI == CSV_QUESTION_NUMBER_COLUMN_INDEX){
+          } else if (columnI == CSV_QUESTION_NUMBER_COLUMN_INDEX) {
             var questionValues = column.split('-');
             columns.push(questionValues[0]); // examTimes
             columns.push(questionValues[1]); // categoryCode
             columns.push(questionValues[2]); // categorySeq
-          } else if(column[0] == '"'){
-            if(column[column.length - 1] != '"'){
+          } else if (column[0] == '"') {
+            if (column[column.length - 1] != '"') {
               console.log('エラー:文章中のダブルクオートの位置が不正です');
             }
             column = column.substr(1, column.length - 2);
@@ -559,7 +546,7 @@ const readAllCsv = function (isRead) {
           } else {
             columns.push(column);
           }
-          if(columns.length == UNMODIFIED_TABEL_COLUMN_COUNT) {
+          if (columns.length == UNMODIFIED_TABEL_COLUMN_COUNT) {
             _addSubCategoryColumn(columns);
             _addStampTwoSelectionsColumn(columns);
             columns.push(null); // 正解フラグを初期化
@@ -574,7 +561,7 @@ const readAllCsv = function (isRead) {
       return result;
     }
 
-  })(function() {
+  })(function () {
     // dbfactory
     return openDb();
   });
@@ -586,12 +573,12 @@ const readAllCsv = function (isRead) {
     }
     return categoryQuizSeqMap;
   }
- 
-    // SQLite Database の初期化と CSVファイルの取り込み
-    wsUtil.init().then(function () {
-      var questionCSVNames = Object.create(setting.questionCSVNames);
-      var quizCSVFilePaths = Object.create(setting.quizCSVFilePaths);
-      wsUtil.import(questionCSVNames, quizCSVFilePaths, createCategoryQuizSeqMap());
-    });
- 
+
+  // SQLite Database の初期化と CSVファイルの取り込み
+  wsUtil.init().then(function () {
+    var questionCSVNames = Object.create(setting.questionCSVNames);
+    var quizCSVFilePaths = Object.create(setting.quizCSVFilePaths);
+    wsUtil.import(questionCSVNames, quizCSVFilePaths, createCategoryQuizSeqMap());
+  });
+
 };
