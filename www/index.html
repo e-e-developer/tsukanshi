@@ -50,6 +50,56 @@
             min-height: 50px;
             padding: 0px;
         }
+
+        /* 行（label列 + 値列）を左右に分ける */
+        .preDialog .option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* 左のラベル列はそのまま */
+        .preDialog .option>div:first-child {
+            flex: 0 0 70%;
+        }
+
+        /* 右の値列は右寄せにする */
+        .preDialog .option>div:last-child {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* チェックボックス群を右寄せ＋きれいに並べる */
+        .preDialog .importance-rank-selection {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* ラベルの中身の縦位置を揃える*/
+        .preDialog .importance-rank-selection .checkbox {
+            display: flex;
+            align-items: center;
+        }
+
+        .importance-rank-selection {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 5px 0;
+        }
+
+        .importance-rank-selection .checkbox {
+            display: flex;
+            align-items: center;
+            /* margin-right: 15px; */
+        }
+
+        .importance-rank-selection .checkbox span {
+            margin-left: 5px;
+        }
     </style>
     <script>
         ons.ready(function () {
@@ -313,6 +363,23 @@
                             </div>
                         </div>
                         <div class="option">
+                            <div>重要度</div>
+                            <div class="importance-rank-selection">
+                                <label class="checkbox">
+                                    <ons-checkbox input-id="rank-a" name="importanceRank" value="A"></ons-checkbox>
+                                    <span>Aランク</span>
+                                </label>
+                                <label class="checkbox">
+                                    <ons-checkbox input-id="rank-b" name="importanceRank" value="B"></ons-checkbox>
+                                    <span>Bランク</span>
+                                </label>
+                                <label class="checkbox">
+                                    <ons-checkbox input-id="rank-c" name="importanceRank" value="C"></ons-checkbox>
+                                    <span>Cランク</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="option">
                             <div>間違えた問題のみ出題する</div>
                             <div class="preDialogMistakeQuizOnlySwitch">
                                 <ons-switch id="preDialog-mistakeQuizOnlySwitch"></ons-switch>
@@ -475,5 +542,4 @@
         </ons-page>
     </template>
 </body>
-
 </html>

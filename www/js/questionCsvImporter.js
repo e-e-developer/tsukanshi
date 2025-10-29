@@ -36,8 +36,8 @@ function checkTableDataExists(tableName) {
  * ２．行の改行コードは[CRLF]、セルの文字列内は[LF]になっている。 
  */
 const readAllCsv = function (isRead) {
-  // CSVタイトル項目数
-  const CSV_TITLE_COLUMN_NUM = 6;
+  // CSVタイトル項目数 (重要度カラムを追加したため7に変更)
+  const CSV_TITLE_COLUMN_NUM = 7;
   // CSVカラム順(問題番号)
   const CSV_QUESTION_NUMBER_COLUMN_INDEX = 1;
   // CSVの行開始番号
@@ -464,8 +464,22 @@ const readAllCsv = function (isRead) {
 
     function _addSubCategoryColumn(columns) {
       var category = columns[TABLE_CATEGORY_NAME_COLUMN_INDEX];
+
+      // 🔍 デバッグ用ログ追加：categoryがstringでない場合に警告を出す
+      if (typeof category !== 'string') {
+        console.warn(
+          '⚠ [CSV解析警告] category が string ではありません',
+          '\nTABLE_CATEGORY_NAME_COLUMN_INDEX =', TABLE_CATEGORY_NAME_COLUMN_INDEX,
+          '\ncolumns =', JSON.parse(JSON.stringify(columns)),
+          '\ncategory 値 =', category
+        );
+        // 落ちずに続行できるよう防御
+        columns.splice(TABLE_CATEGORY_NAME_COLUMN_INDEX + 1, 0, null);
+        return;
+      }
+
       var subCategoryStart = category.indexOf(SUB_CATEGORY_START_WORD);
-      if (category.indexOf(SUB_CATEGORY_START_WORD) != -1) {
+      if (subCategoryStart !== -1) {
         columns[TABLE_CATEGORY_NAME_COLUMN_INDEX] = category.substr(0, subCategoryStart);
         columns.splice(TABLE_CATEGORY_NAME_COLUMN_INDEX + 1, 0, category.substr(subCategoryStart));
       } else {
@@ -515,17 +529,26 @@ const readAllCsv = function (isRead) {
         {
           var column = columnStr[columnI];
           if (columnI == 0) {
-            var categoryName = column.replace(/\n/g, '');//replaceAll('\n', '');
+            // セル内の改行と前後空白を除去
+            var categoryName = column.replace(/\n/g, '').trim(); //replaceAll('\n', '');
             {
-              var categoryQuizSeq = categoryQuizSeqMap[categoryName] + 1;
-              if (!categoryQuizSeq) {
-                console.log(categoryName + 'でcategoryQuizSeqMapを参照しましたが見つかりませんでした');
+              // categoryQuizSeqMap に無ければ初期化して続行する（堅牢性向上）
+              if (typeof categoryQuizSeqMap[categoryName] === 'undefined' || categoryQuizSeqMap[categoryName] === null) {
+                console.warn(categoryName + ' でcategoryQuizSeqMapを参照しましたが見つかりませんでした。0で初期化します');
+                categoryQuizSeqMap[categoryName] = 0;
               }
+              var categoryQuizSeq = categoryQuizSeqMap[categoryName] + 1;
               columns.push(categoryQuizSeq); // categoryQuizOrder
               categoryQuizSeqMap[categoryName] = categoryQuizSeq;
             }
             column = categoryName;
-            columns.push(setting.categoryCodeMap[column]); // categoryCode
+            // categoryCode が無ければ null を入れて警告
+            var mappedCategoryCode = setting.categoryCodeMap[column];
+            if (typeof mappedCategoryCode === 'undefined') {
+              console.warn(column + ' のcategoryCodeが見つかりません。設定ファイルのキーとCSVの表記を確認してください。');
+              mappedCategoryCode = null;
+            }
+            columns.push(mappedCategoryCode); // categoryCode
             columns.push(column); // categoryName
           } else if (columnI == CSV_QUESTION_NUMBER_COLUMN_INDEX) {
             var questionValues = column.split('-');
