@@ -52,7 +52,7 @@ const readAllCsv = function (isRead) {
   // テーブルカラム順(問題)
   const TABLE_QUESTION_COLUMN_INDEX = 7;
   // テーブルカラム順(選択肢)
-  const TABLE_SELECTION_COLUMN_INDEX = 9;
+  const TABLE_SELECTION_COLUMN_INDEX = 10;
   // サブカテゴリ開始時の文字
   const SUB_CATEGORY_START_WORD = '（';
 
@@ -489,7 +489,10 @@ const readAllCsv = function (isRead) {
 
     function _addStampTwoSelectionsColumn(columns) {
       var selection = columns[TABLE_SELECTION_COLUMN_INDEX - 1];
-      columns.splice(TABLE_QUESTION_COLUMN_INDEX + 1, 0, selection == setting.twoSelectionStr ? 1 : 0);
+      console.log('492行目デバッグ用ログ:');
+      console.log(columns[TABLE_SELECTION_COLUMN_INDEX - 1]);
+      console.log(columns);
+      columns.splice(TABLE_QUESTION_COLUMN_INDEX + 2, 0, selection == setting.twoSelectionStr ? 1 : 0);
     }
 
     function _convertToArray(val, categoryQuizSeqMap) {

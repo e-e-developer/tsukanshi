@@ -7,7 +7,7 @@ var menuObj =
     loadMenu: function (){
         var largeCategoryMap = {};
         var categoryMap = {};
-        var initExamTimes = 58;
+        var initExamTimes = 59;
         var initQuizSeq = 1;
 
         var btnTableFnc = function (id_) {
@@ -83,7 +83,7 @@ var menuObj =
 
         var largeCategoryMap = {};
         var categoryMap = {};
-        var initExamTimes = 58;
+        var initExamTimes = 59;
         var initQuizSeq = 1;
 
         var btnTableFnc = function (id_) {

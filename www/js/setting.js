@@ -4,7 +4,7 @@ var setting = {
     storedQuizObjKey: 'storedQuizObjKey',
     CSVImportedKey: "CSVImported",
     minExamTimes: 51,
-    maxExamTimes: 58,
+    maxExamTimes: 59,
     twoSelectionMaru: "○",
     twoSelectionBatsu: "×",
     twoSelectionStr: "○×",
