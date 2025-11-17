@@ -39,7 +39,7 @@
 ons-list.list ons-col:first-child{
     font-size: 1rem;
     text-align: right;
-    min-width: 85px !important;
+    min-width: 75px !important;
     white-space: nowrap;
     position: relative;
     right: 0.5rem;

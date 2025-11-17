@@ -489,9 +489,6 @@ const readAllCsv = function (isRead) {
 
     function _addStampTwoSelectionsColumn(columns) {
       var selection = columns[TABLE_SELECTION_COLUMN_INDEX - 1];
-      console.log('492行目デバッグ用ログ:');
-      console.log(columns[TABLE_SELECTION_COLUMN_INDEX - 1]);
-      console.log(columns);
       columns.splice(TABLE_QUESTION_COLUMN_INDEX + 2, 0, selection == setting.twoSelectionStr ? 1 : 0);
     }
 
@@ -533,25 +530,18 @@ const readAllCsv = function (isRead) {
           var column = columnStr[columnI];
           if (columnI == 0) {
             // セル内の改行と前後空白を除去
-            var categoryName = column.replace(/\n/g, '').trim(); //replaceAll('\n', '');
+            // var categoryName = column.replace(/\n/g, '').trim(); //replaceAll('\n', '');
+            var categoryName = column.replace(/\n/g, ''); //replaceAll('\n', '');
             {
-              // categoryQuizSeqMap に無ければ初期化して続行する（堅牢性向上）
-              if (typeof categoryQuizSeqMap[categoryName] === 'undefined' || categoryQuizSeqMap[categoryName] === null) {
-                console.warn(categoryName + ' でcategoryQuizSeqMapを参照しましたが見つかりませんでした。0で初期化します');
-                categoryQuizSeqMap[categoryName] = 0;
-              }
               var categoryQuizSeq = categoryQuizSeqMap[categoryName] + 1;
+              if (!categoryQuizSeq) {
+                console.log(categoryName + 'でcategoryQuizSeqMapを参照しましたが見つかりませんでした');
+              }
               columns.push(categoryQuizSeq); // categoryQuizOrder
               categoryQuizSeqMap[categoryName] = categoryQuizSeq;
             }
             column = categoryName;
-            // categoryCode が無ければ null を入れて警告
-            var mappedCategoryCode = setting.categoryCodeMap[column];
-            if (typeof mappedCategoryCode === 'undefined') {
-              console.warn(column + ' のcategoryCodeが見つかりません。設定ファイルのキーとCSVの表記を確認してください。');
-              mappedCategoryCode = null;
-            }
-            columns.push(mappedCategoryCode); // categoryCode
+            columns.push(setting.categoryCodeMap[column]); // categoryCode
             columns.push(column); // categoryName
           } else if (columnI == CSV_QUESTION_NUMBER_COLUMN_INDEX) {
             var questionValues = column.split('-');
