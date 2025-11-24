@@ -141,31 +141,28 @@ var menuObj =
             
 
         }
-        if(categorytable !== "TTuuKanJituMuQuiz")
-        {
-            categoryMap = util.convertCodeMapToMap(setting.categoryCodeMap);
-            for (var code = 1; code < Object.keys(categoryMap).length + 1; code++) {
-                var btnTable = btnTableFnc(code);
-                var btnTd = btnTdFnc(code);
-                
-                if( categorycodes.indexOf(code) == -1 ) continue;
-                var btnDiv = $("<div></div>", {
-                    id:"category-btnDiv" + "_" + code,
-                    text: categoryMap[code],
-                    align: "center",
-                    "class": "main_btn test5",
-                    on: {
-                        click: function(event){
-                            var categoryCode = parseInt(event.currentTarget.id.split('_')[1]);
-                            var tableName = util.selectTableName(categoryCode);
-                            // quizObj生成
-                            initQuiz(categoryCode, initExamTimes, initQuizSeq, categoryMap[categoryCode], tableName);
-                            questionObj.countQuestionByCategory(dialogObj.show);
-                        }
+        categoryMap = util.convertCodeMapToMap(setting.categoryCodeMap);
+        for (var code = 1; code < Object.keys(categoryMap).length + 1; code++) {
+            var btnTable = btnTableFnc(code);
+            var btnTd = btnTdFnc(code);
+
+            if( categorycodes.indexOf(code) == -1 ) continue;
+            var btnDiv = $("<div></div>", {
+                id:"category-btnDiv" + "_" + code,
+                text: categoryMap[code],
+                align: "center",
+                "class": "main_btn test5",
+                on: {
+                    click: function(event){
+                        var categoryCode = parseInt(event.currentTarget.id.split('_')[1]);
+                        var tableName = util.selectTableName(categoryCode);
+                        // quizObj生成
+                        initQuiz(categoryCode, initExamTimes, initQuizSeq, categoryMap[categoryCode], tableName);
+                        questionObj.countQuestionByCategory(dialogObj.show);
                     }
-                });
-                addNodeFnc(btnTable, btnTd, btnDiv);
-            }
+                }
+            });
+            addNodeFnc(btnTable, btnTd, btnDiv);
         }
 
         //title 変更
